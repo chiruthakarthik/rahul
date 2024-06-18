@@ -1,0 +1,34 @@
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+char *findLongestCommonPrefix(char **str, int numStr, int maxLen)
+{
+    char *prefix = (char *)malloc((maxLen + 1) * sizeof(char)); // allocate memory for prefix
+    int i, j;
+    for (i = 0; i < maxLen; i++)
+    {
+        prefix[i] = str[0][i]; // initialize prefix with first string
+        for (j = 1; j < numStr; j++)
+        {
+            if (prefix[i] != str[j][i])
+            {
+                prefix[i] = '\0'; // set the end of the prefix
+                return prefix;
+            }
+        }
+    }
+    prefix[i] = '\0'; // set the end of the prefix
+    return prefix;
+}
+
+int main()
+{
+    char *str[] = {"flower", "flow", "flight"};
+    int numStr = 3;
+    int maxLen = 6;
+    char *prefix = findLongestCommonPrefix(str, numStr, maxLen);
+    printf("%s\n", prefix);
+    free(prefix); // deallocate memory for prefix
+    return 0;
+}
